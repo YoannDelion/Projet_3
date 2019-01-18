@@ -1,0 +1,199 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: rgb(248, 248, 248);
+}
+
+/*----------------- MENU -----------------*/
+nav {
+    border-bottom: 1px solid #e7e7e7;
+    box-shadow: 0 3px 8px #999999;
+}
+
+/*----------------- HEADER -----------------*/
+.accueilBanner {
+    background-image: url("../images/homeBackground2.jpeg");
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.articlesBanner{
+    height: 400px;
+    background-image:  url("../images/posts3.jpg") ;
+    background-position: center;
+    background-size: cover;
+}
+
+.chapitreBanner{
+    height: 400px;
+    background-image:  url("../images/banner.jpg") ;
+    background-position: center;
+    background-size: cover;
+}
+
+.headerTitle {
+    width: 100%;
+    height: 100%;
+}
+
+.title, .subtitle {
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    color: white;
+}
+
+.bandeau {
+    background-color: white;
+    height: 80px;
+    width: 1px;
+}
+
+.subtitle h3 {
+    display: inline-block;
+    padding: 25px;
+    margin: 0;
+    height: 100%;
+    transition-property: background;
+    transition-duration: 1s;
+}
+
+.subtitle h3:hover {
+    background: rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    color: white;
+}
+
+header a, header a:hover, header a:focus {
+    text-decoration: none;
+    color: white;
+}
+
+/*----------------- SECTION -----------------*/
+section, .content {
+    padding: 20px;
+}
+
+h4 {
+    display: inline-block;
+    padding-bottom: 5px;
+    position: relative;
+}
+
+section h4::before {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 1px;
+    bottom: 0;
+    left: 25%;
+    border-bottom: 1px solid black;
+}
+
+.post {
+    margin: 30px;
+    padding: 30px;
+    background-color: white;
+    text-align: justify;
+}
+
+.readMore {
+    margin-top: 20px;
+    background: #ffffff;
+    border: 1px solid #333;
+    display: inline-block;
+    color: #333;
+    padding: 16px 31px;
+    transition-property: background;
+    transition-duration: 0.5s;
+}
+
+.readAll {
+    margin-left: auto;
+}
+
+.readMore:hover {
+    background: #fafafa;
+    text-decoration: none;
+    color: #333;
+}
+
+.readAll {
+    text-align: center;
+}
+
+.readMore:active {
+    text-decoration: none;
+    color: #333;
+}
+
+aside {
+    background-color: white;
+    padding: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+aside img {
+    margin-bottom: 30px;
+    border-radius: 50%;
+}
+
+.socialLink {
+    height: 50px;
+    width: 50px;
+    border-radius: 5%;
+    background-color: #f4f4f4;
+    text-align: center;
+    font-size: 1.4em;
+    line-height: 2.5em;
+}
+
+.socialLink a:hover {
+    color: white;
+}
+
+#facebook:hover {
+    background-color: #3b5998;
+}
+
+#twitter:hover {
+    background-color: #00aced;
+}
+
+#instagram:hover {
+    background: linear-gradient(49.2deg, #f9ed32 10%, #ee2a7b 55%, #002aff);
+}
+
+#linkedin:hover {
+    background-color: #0077B5;
+}
+
+#social {
+    display: flex;
+    justify-content: space-around;
+}
+
+#social i {
+    width: 100%;
+    height: 100%;
+}
+
+/****** FOOTER ******/
+footer {
+    background-color: #343a40;
+    color: white;
+    padding: 10px;
+}
+
+footer a, footer a:hover {
+    color: white;
+}

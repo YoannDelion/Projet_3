@@ -199,4 +199,103 @@ class Comment
         $this->reportedAt = $reportedAt;
     }
 
+    /**
+     * @param Comment $comment
+     * @return int
+     * Ajoute un commentaire en base, retourne 0 si erreur lors de l'ajout
+     */
+    public function add(Comment $comment)
+    {
+        $bdd = BddConnexion::getConnexion();
+        $req = $bdd->prepare('INSERT INTO comment(postId, author, comment, createdAt) VALUES(:postId, :author, :comment, NOW())');
+        $req->bindValue(':postId', $comment->getPostId(), PDO::PARAM_INT);
+        $req->bindValue(':author', $comment->getAuthor(), PDO::PARAM_STR);
+        $req->bindValue(':comment', $comment->getComment(), PDO::PARAM_STR);
+        $req->execute();
+        $retour = $req->rowCount();
+        return $retour;
+    }
+
+    /**
+     * @param $postId
+     * @return array
+     */
+    public function findAllByPost($postId)
+    {
+        $bdd = BddConnexion::getConnexion();
+        $listComments = [];
+        $req = $bdd->prepare('SELECT id, postId, author, comment, createdAt, updated, updatedAt, reported, reportedAt FROM comment WHERE postId=:postId');
+        $req->bindValue($postId, $postId, PDO::PARAM_INT);
+        $req->execute();
+        while($datas = $req->fetch()){
+            $comment = new Comment();
+            $comment->setId($datas['id']);
+            $comment->setPostId($postId);
+            $comment->setAuthor($datas['author']);
+            $comment->setComment($datas['comment']);
+            $comment->setCreatedAt($datas['identifiant']);
+            $comment->setUpdated($datas['updated']);
+            $comment->setUpdatedAt($datas['updatedAt']);
+            $comment->setReported($datas['reported']);
+            $comment->setReportedAt($datas['reportedAt']);
+            $listComments[] = $comment;
+        }
+        return $listComments;
+    }
+
+    /**
+     * @return Comment[]
+     */
+    public function findAllReported()
+    {
+        $bdd = BddConnexion::getConnexion();
+        $listeReports = [];
+
+        $req = $bdd->query("SELECT id, postId, author, comment, createdAt, updated, updatedAt, reported, reportedAt FROM comment WHERE reported=true");
+        while($datas = $req->fetch()){
+            $report = new Comment();
+            $report->setId($datas['id']);
+            $report->setPostId($datas['postId']);
+            $report->setAuthor($datas['author']);
+            $report->setComment($datas['comment']);
+            $report->setCreatedAt($datas['identifiant']);
+            $report->setUpdated($datas['updated']);
+            $report->setUpdatedAt($datas['updatedAt']);
+            $report->setReported($datas['reported']);
+            $report->setReportedAt($datas['reportedAt']);
+            $listeReports[] = $report;
+        }
+        return $listeReports;
+    }
+
+    /**
+     * @param Comment $comment
+     * @return int
+     * retourne 0 si erreur lors de la modification
+     */
+    public function update(Comment $comment)
+    {
+        $bdd = BddConnexion::getConnexion();
+        $req = $bdd->prepare("UPDATE comment SET comment=:comment,  updated=true, updatedAt=NOW(), WHERE id=:id");
+        $req->bindValue(':comment', $comment->getComment(), PDO::PARAM_STR);
+        $req->bindValue(':id', $comment->getId(), PDO::PARAM_INT);
+        $req->execute();
+        $reponse = $req->rowCount();
+        return $reponse;
+    }
+
+    /**
+     * @param $id
+     * @return int
+     * retourne 0 si erreur lors de la suppression
+     */
+    public function delete($id)
+    {
+        $bdd = BddConnexion::getConnexion();
+        $req = $bdd->prepare("DELETE FROM comment WHERE id=:id");
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+        $reponse = $req->rowCount();
+        return $reponse;
+    }
 }

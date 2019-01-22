@@ -8,7 +8,7 @@
 
 class BddConnexion
 {
-    public function getConnexion()
+    public static function getConnexion()
     {
         try {
             $bdd = new PDO('mysql:host=localhost;dbname=projet3', 'root', '');

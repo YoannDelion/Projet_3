@@ -200,8 +200,106 @@ class Post
         $this->reportedAt = $reportedAt;
     }
 
+    /**
+     * @param Post $post
+     * @return int
+     * retourne 0 si erreur lors de l'ajout
+     */
+    public function add(Post $post)
+    {
+        $bdd = BddConnexion::getConnexion();
 
+        $req = $bdd->prepare('INSERT INTO post(author, title, content, createdAt) VALUES(:author, :title, :content, NOW())');
+        $req->bindValue(':author', $post->getAuthor(), PDO::PARAM_STR);
+        $req->bindValue(':title', $post->getTitle(), PDO::PARAM_STR);
+        $req->bindValue(':content', $post->getContent(), PDO::PARAM_STR);
+        $req->execute();
+        $retour = $req->rowCount();
 
+        return $retour;
+    }
 
+    /**
+     * @return Post[]
+     */
+    public function findAll()
+    {
+        $bdd = BddConnexion::getConnexion();
+        $listPosts = [];
 
+        $req = $bdd->query('SELECT id, author, title, content, createdAt, updated, updatedAt, reported, reportedAt FROM post');
+        while($datas = $req->fetch()){
+            $post = new Post();
+            $post->setId($datas['id']);
+            $post->setAuthor($datas['author']);
+            $post->setTitle($datas['title']);
+            $post->setContent($datas['content']);
+            $post->setCreatedAt($datas['createdAt']);
+            $post->setUpdated($datas['updated']);
+            $post->setUpdatedAt($datas['updatedAt']);
+            $post->setReported($datas['reported']);
+            $post->setReportedAt($datas['reportedAt']);
+            $listPosts[] = $post;
+        }
+        return $listPosts;
+    }
+
+    /**
+     * @param $id
+     * @return Post
+     */
+    public function findById($id)
+    {
+        $bdd = BddConnexion::getConnexion();
+
+        $req = $bdd->prepare('SELECT id, author, title, content, createdAt, updated, updatedAt, reported, reportedAt FROM post WHERE id=:id');
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+        $data = $req->fetch();
+
+        $post = new Post();
+        $post->setId($id);
+        $post->setAuthor($data['author']);
+        $post->setTitle($data['title']);
+        $post->setContent($data['content']);
+        $post->setCreatedAt($data['createdAt']);
+        $post->setUpdated($data['updated']);
+        $post->setUpdatedAt($data['updatedAt']);
+        $post->setReported($data['reported']);
+        $post->setReportedAt($data['reportedAt']);
+
+        return $post;
+    }
+
+    /**
+     * @param Post $post
+     * @return int
+     * retourne 0 si erreur lors de la mise a jour
+     */
+    public function update(Post $post)
+    {
+        $bdd = BddConnexion::getConnexion();
+
+        $req = $bdd->prepare('UPDATE post SET title=:title, content=:content, updated=true, updatedAt=NOW()');
+        $req->bindValue(':title', $post->getContent(), PDO::PARAM_STR);
+        $req->bindValue(':content', $post->getContent(), PDO::PARAM_STR);
+        $req->execute();
+        $reponse = $req->rowCount();
+        return $reponse;
+    }
+
+    /**
+     * @param $id
+     * @return int
+     * retourne 0 si erreur lors de la suppression
+     */
+    public function delete($id)
+    {
+        $bdd = BddConnexion::getConnexion();
+        $req = $bdd->prepare("DELETE FROM post WHERE id=:id");
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+        $reponse = $req->rowCount();
+        return $reponse;
+    }
 }

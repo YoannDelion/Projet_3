@@ -45,6 +45,18 @@ class Post
     private $updatedAt;
 
     /**
+     * @var boolean
+     * vaut true si le post a été signalé
+     */
+    private $reported;
+
+    /**
+     * @var DateTime|null
+     */
+    private $reportedAt;
+
+
+    /**
      * @return int
      */
     public function getId()
@@ -154,6 +166,38 @@ class Post
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isReported()
+    {
+        return $this->reported;
+    }
+
+    /**
+     * @param bool $reported
+     */
+    public function setReported($reported)
+    {
+        $this->reported = $reported;
+    }
+
+    /**
+     * @return DateTime|null
+     */
+    public function getReportedAt()
+    {
+        return $this->reportedAt;
+    }
+
+    /**
+     * @param DateTime|null $reportedAt
+     */
+    public function setReportedAt($reportedAt)
+    {
+        $this->reportedAt = $reportedAt;
     }
 
 

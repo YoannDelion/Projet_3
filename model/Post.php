@@ -288,6 +288,23 @@ class Post
         return $reponse;
     }
 
+
+    /**
+     * @param $postId
+     * @return int
+     * retourne 0 si erreur lors de la mise a jour
+     * enregistre le signalement et sa date
+     */
+    public function report($postId)
+    {
+        $bdd = BddConnexion::getConnexion();
+        $req = $bdd->prepare("UPDATE post SET reported=true,  reportedAt=NOW(), WHERE id=:id");
+        $req->bindValue(':id', $postId, PDO::PARAM_INT);
+        $req->execute();
+        $reponse = $req->rowCount();
+        return $reponse;
+    }
+
     /**
      * @param $id
      * @return int

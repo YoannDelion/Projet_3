@@ -140,7 +140,7 @@ class User
     {
         $bdd = BddConnexion::getConnexion();
 
-        $req = $bdd->prepare('SELECT id, name, password, role FROM post WHERE id=:id');
+        $req = $bdd->prepare('SELECT id, name, role FROM post WHERE id=:id');
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
         $data = $req->fetch();
@@ -148,7 +148,6 @@ class User
         $user = new User();
         $user->setId($data['id']);
         $user->setName($data['name']);
-        $user->setPassword($data['password']);
         $user->setRole($data['role']);
 
         return $user;

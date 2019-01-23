@@ -225,7 +225,7 @@ class Comment
         $bdd = BddConnexion::getConnexion();
         $listComments = [];
         $req = $bdd->prepare('SELECT id, postId, author, comment, createdAt, updated, updatedAt, reported, reportedAt FROM comment WHERE postId=:postId');
-        $req->bindValue($postId, $postId, PDO::PARAM_INT);
+        $req->bindValue('postId', $postId, PDO::PARAM_INT);
         $req->execute();
         while($datas = $req->fetch()){
             $comment = new Comment();
@@ -233,7 +233,7 @@ class Comment
             $comment->setPostId($postId);
             $comment->setAuthor($datas['author']);
             $comment->setComment($datas['comment']);
-            $comment->setCreatedAt($datas['identifiant']);
+            $comment->setCreatedAt($datas['createdAt']);
             $comment->setUpdated($datas['updated']);
             $comment->setUpdatedAt($datas['updatedAt']);
             $comment->setReported($datas['reported']);
@@ -279,6 +279,22 @@ class Comment
         $req = $bdd->prepare("UPDATE comment SET comment=:comment,  updated=true, updatedAt=NOW(), WHERE id=:id");
         $req->bindValue(':comment', $comment->getComment(), PDO::PARAM_STR);
         $req->bindValue(':id', $comment->getId(), PDO::PARAM_INT);
+        $req->execute();
+        $reponse = $req->rowCount();
+        return $reponse;
+    }
+
+    /**
+     * @param $commentId
+     * @return int
+     * enregistre le signalement et sa date
+     * retourne 0 si erreur lors de la modification
+     */
+    public function report($commentId)
+    {
+        $bdd = BddConnexion::getConnexion();
+        $req = $bdd->prepare("UPDATE comment SET reported=true,  reportedAt=NOW(), WHERE id=:id");
+        $req->bindValue(':id', $commentId, PDO::PARAM_INT);
         $req->execute();
         $reponse = $req->rowCount();
         return $reponse;

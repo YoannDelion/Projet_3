@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Home</title>
+    <title>Accueil</title>
 
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../vue/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -39,41 +39,22 @@
     <div id="content" class="row content">
         <section class="col-sm-9 ">
             <h4>Les derniers chapitres publiés</h4>
-            <article class="post">
-                <h5>Titre du chapitre</h5>
-                <p class="text-right">Publié le 19/11/2018</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.</p>
-                <a href="chapitre.vue.php" class="readMore">Lire la suite <span class="fas fa-arrow-right"></span></a>
-            </article>
 
-            <article class="post">
-                <h5>Titre du chapitre</h5>
-                <p class="text-right">Publié le 19/11/2018</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.</p>
-                <a href="chapitre.vue.php" class="readMore">Lire la suite <span class="fas fa-arrow-right"></span></a>
+            <?php
+            foreach ($posts as $post) {
+            ?>
+                <article class="post">
+                <h5><?= $post->getTitle(); ?></h5>
+                <p class="text-right">Publié le <?= $post->getCreatedAt(); ?></p>
+                <p><?= $post->getContent(); ?></p>
+                <a href="/Projet_3/controler/chapitre.php?id=<?= $post->getId(); ?>" class="readMore">Lire la suite <span class="fas fa-arrow-right"></span></a>
             </article>
-
-            <article class="post">
-                <h5>Titre du chapitre</h5>
-                <p class="text-right">Publié le 19/11/2018</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.</p>
-                <a href="chapitre.vue.php" class="readMore">Lire la suite <span class="fas fa-arrow-right"></span></a>
-            </article>
+            <?php
+            }
+            ?>
 
             <div class="text-center">
-                <a href="articles.vue.php" class="readMore">Lire tous les articles</a>
+                <a href="/Projet_3/controler/articles.php" class="readMore">Lire tous les articles</a>
             </div>
 
         </section>

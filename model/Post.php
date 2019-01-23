@@ -245,6 +245,32 @@ class Post
     }
 
     /**
+     * @return Post[]
+     * recupère les trois derniers posts insérés en base
+     */
+    public function findLatest()
+    {
+        $bdd = BddConnexion::getConnexion();
+        $listPosts = [];
+
+        $req = $bdd->query('SELECT id, author, title, content, createdAt, updated, updatedAt, reported, reportedAt FROM post ORDER BY id DESC LIMIT 0,3');
+        while($datas = $req->fetch()){
+            $post = new Post();
+            $post->setId($datas['id']);
+            $post->setAuthor($datas['author']);
+            $post->setTitle($datas['title']);
+            $post->setContent($datas['content']);
+            $post->setCreatedAt($datas['createdAt']);
+            $post->setUpdated($datas['updated']);
+            $post->setUpdatedAt($datas['updatedAt']);
+            $post->setReported($datas['reported']);
+            $post->setReportedAt($datas['reportedAt']);
+            $listPosts[] = $post;
+        }
+        return $listPosts;
+    }
+
+    /**
      * @param $id
      * @return Post
      */
@@ -258,7 +284,7 @@ class Post
         $data = $req->fetch();
 
         $post = new Post();
-        $post->setId($id);
+        $post->setId($data['id']);
         $post->setAuthor($data['author']);
         $post->setTitle($data['title']);
         $post->setContent($data['content']);

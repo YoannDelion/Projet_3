@@ -1,8 +1,10 @@
-#RewriteEngine On
-#
-#RewriteRule ^$                                                  index.html
-#RewriteRule ^index.html$                                        controler/accueil.php [L]
-#RewriteRule ^index                                              controler/accueil.php [L]
-#RewriteRule ^accueil                                            controler/accueil.php [L]
-#RewriteRule ^chapitre                                           controler/chapitre.php [L]
-#RewriteRule ^articles                                           controler/articles.php [L]
+RewriteEngine On
+
+RewriteRule ^$                                                  index.html
+RewriteRule ^index.html$                                        controler/accueil.php [L]
+RewriteRule ^index                                              controler/accueil.php [L]
+RewriteRule ^accueil                                            controler/accueil.php [L]
+RewriteRule ^chapitre                                           controler/chapitre.php [L]
+RewriteRule ^articles                                           controler/articles.php [L]
+RewriteRule ^admin                                              controler/admin.php [L]
+RewriteRule ^connexion                                          controler/connexion.php [L]

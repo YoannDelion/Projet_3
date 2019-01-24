@@ -6,12 +6,12 @@
  * Time: 18:29
  */
 
-include_once '../utils/bddConnexion.php';
-include_once '../utils/autoloader.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/bddConnexion.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/autoloader.php';
 
 
 $post = new Post();
 $posts = $post->findLatest();
 
 
-include_once '../vue/accueil.vue.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/vue/accueil.vue.php';

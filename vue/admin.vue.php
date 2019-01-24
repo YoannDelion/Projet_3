@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link href="css/admin.css" rel="stylesheet">
+    <link href="/vue/css/admin.css" rel="stylesheet">
 </head>
 
 <body>
@@ -23,7 +23,7 @@
 
     <ul class="push-right navbar-nav ml-auto">
         <li class="nav-item ">
-            <a class="nav-link " href="accueil.vue.php">
+            <a class="nav-link " href="/accueil">
                 <i class="fas fa-home"></i>
                 <span>Retour à l'accueil</span>
             </a>

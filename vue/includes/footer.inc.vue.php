@@ -1,3 +1,3 @@
 <footer class="row ">
-    <a href="admin.vue.php">Administration</a>
+    <a href="/admin">Administration</a>
 </footer>

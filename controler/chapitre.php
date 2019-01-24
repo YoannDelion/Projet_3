@@ -6,11 +6,12 @@
  * Time: 18:59
  */
 
-include_once '../utils/bddConnexion.php';
-include_once '../utils/autoloader.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/bddConnexion.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/autoloader.php';
 
 
 $post = new Post();
+$comments = new Comment();
 $erreur = null;
 
 if(isset($_GET['id']) && $_GET['id'] !== null) {
@@ -20,6 +21,9 @@ if(isset($_GET['id']) && $_GET['id'] !== null) {
 
 if($post->getId() === null) {
     $erreur = 'Ce chapitre n\'existe pas !';
+} else {
+    $comments = $comments->findAllByPost($post->getId());
 }
 
-include_once '../vue/chapitre.vue.php';
+
+include_once $_SERVER['DOCUMENT_ROOT'] . '/vue/chapitre.vue.php';

@@ -6,6 +6,6 @@
  * Time: 13:09
  */
 
-foreach (glob($_SERVER['DOCUMENT_ROOT'] . '/Projet_3/model/*') as $fichier) {
+foreach (glob($_SERVER['DOCUMENT_ROOT'] . '/model/*') as $fichier) {
     include $fichier;
 }

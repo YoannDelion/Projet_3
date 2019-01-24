@@ -224,7 +224,7 @@ class Comment
     {
         $bdd = BddConnexion::getConnexion();
         $listComments = [];
-        $req = $bdd->prepare('SELECT id, postId, author, comment, createdAt, updated, updatedAt, reported, reportedAt FROM comment WHERE postId=:postId');
+        $req = $bdd->prepare('SELECT id, postId, author, comment, createdAt, updated, updatedAt, reported, reportedAt FROM comment WHERE postId=:postId ORDER BY id DESC ');
         $req->bindValue('postId', $postId, PDO::PARAM_INT);
         $req->execute();
         while($datas = $req->fetch()){
@@ -251,7 +251,7 @@ class Comment
         $bdd = BddConnexion::getConnexion();
         $listeReports = [];
 
-        $req = $bdd->query("SELECT id, postId, author, comment, createdAt, updated, updatedAt, reported, reportedAt FROM comment WHERE reported=true");
+        $req = $bdd->query("SELECT id, postId, author, comment, createdAt, updated, updatedAt, reported, reportedAt FROM comment WHERE reported=true ORDER BY reportedAt DESC");
         while($datas = $req->fetch()){
             $report = new Comment();
             $report->setId($datas['id']);

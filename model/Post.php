@@ -227,7 +227,7 @@ class Post
         $bdd = BddConnexion::getConnexion();
         $listPosts = [];
 
-        $req = $bdd->query('SELECT id, author, title, content, createdAt, updated, updatedAt, reported, reportedAt FROM post');
+        $req = $bdd->query('SELECT id, author, title, content, createdAt, updated, updatedAt, reported, reportedAt FROM post ORDER BY id DESC');
         while($datas = $req->fetch()){
             $post = new Post();
             $post->setId($datas['id']);

@@ -2,16 +2,14 @@
 /**
  * Projet_3
  * User: YoannD
- * Date: 23/01/2019
- * Time: 19:13
+ * Date: 24/01/2019
+ * Time: 17:59
  */
 
 include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/bddConnexion.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/autoloader.php';
 
 
-$post = new Post();
-$posts = $post->findAll();
 
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/vue/articles.vue.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/vue/admin.vue.php';

@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link href="../vue/css/style.css" rel="stylesheet">
+    <link href="/vue/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -36,24 +36,31 @@
                 <h4>Les chapitres</h4>
 
                 <?php
-                foreach ($posts as $post) {
-                    ?>
-                    <article class="post">
-                        <h5><?= $post->getTitle(); ?></h5>
-                        <p class="text-right">Publié le <?= $post->getCreatedAt(); ?></p>
-                        <p><?= $post->getContent(); ?></p>
-                        <a href="/Projet_3/controler/chapitre.php?id=<?= $post->getId(); ?>" class="readMore">Lire la suite <span class="fas fa-arrow-right"></span></a>
-                    </article>
+                if(isset($posts) && count($posts)>0) {
+                    foreach ($posts as $post) {
+                        ?>
+                        <article class="post">
+                            <h5><?= $post->getTitle(); ?></h5>
+                            <p class="text-right">Publié le <?= $post->getCreatedAt(); ?></p>
+                            <p><?= $post->getContent(); ?></p>
+                            <a href="chapitre?id=<?= $post->getId(); ?>" class="readMore">Lire la suite <span
+                                        class="fas fa-arrow-right"></span></a>
+                        </article>
+                        <?php
+                    }
+                } else { ?>
+                    <div class="alert alert-warning text-center">
+                        <b>Aucun article n'a été publié pour le moment !</b>
+                    </div>
                     <?php
                 }
                 ?>
-
             </div>
         </section>
     </div>
 
     <?php
-    include_once 'includes/footer.inc.vue.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/vue/includes/footer.inc.vue.php';
     ?>
 
 </div>

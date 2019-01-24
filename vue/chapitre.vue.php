@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link href="../vue/css/style.css" rel="stylesheet">
+    <link href="/vue/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -21,7 +21,7 @@
     <!-- MENU -->
     <div class="row">
         <?php
-        include_once 'includes/menu.inc.vue.php';
+        include_once $_SERVER['DOCUMENT_ROOT'] . '/vue/includes/menu.inc.vue.php';
         ?>
     </div>
 
@@ -38,7 +38,7 @@
                 </div>
                 <div class="col-12">
                     <div class="text-center">
-                        <a href="/Projet_3/controler/accueil.php" class="readMore">Retour à l'accueil</a>
+                        <a href="/accueil" class="readMore">Retour à l'accueil</a>
                     </div>
                 </div>
             </section>
@@ -60,56 +60,34 @@
             <section class="row">
                 <div class="col-sm-6">
                     <h4>Commentaires</h4>
-                    <article class="post">
-                        <h5>Titre du commentaire</h5>
-                        <p class="text-right">Publié le 19/11/2018</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                            officia
-                            deserunt mollit anim id est laborum.</p>
-                    </article>
+                    <?php
+                    if (isset($comments) && count($comments) > 0) {
+                        foreach ($comments as $comment) {
+                            ?>
+                            <article class="post">
+                                <h5><?= $comment->getAuthor(); ?></h5>
+                                <p class="text-right">Publié le <?= $comment->getCreatedAt(); ?></p>
+                                <p><?= $comment->getComment(); ?></p>
+                            </article>
 
-                    <article class="post">
-                        <h5>Titre du commentaire</h5>
-                        <p class="text-right">Publié le 19/11/2018</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                            officia
-                            deserunt mollit anim id est laborum.</p>
-                    </article>
-
-                    <article class="post">
-                        <h5>Titre du commentaire</h5>
-                        <p class="text-right">Publié le 19/11/2018</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                            officia
-                            deserunt mollit anim id est laborum.</p>
-                    </article>
+                            <?php
+                        }
+                    } else { ?>
+                        <div class="alert alert-warning text-center">
+                            <b>Aucun commentaire pour ce chapitre.</b>
+                        </div>
+                        <?php
+                    }
+                    ?>
                 </div>
 
                 <div class="col-sm-6">
-                    <h4>Vous devez être connecté pour écrire</h4>
-                    <article class="post">
-                        <h5>Titre du commentaire</h5>
-                        <p class="text-right">Publié le 19/11/2018</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                            officia
-                            deserunt mollit anim id est laborum.</p>
-                    </article>
+                    <h4>Publier un commentaire</h4>
+                    <div class="alert alert-primary text-center">
+                        <b>Vous devez être <a href="/connexion">connecté</a> pour écrire un commentaire !</b>
+                    </div>
+<!--                    <article class="post">-->
+<!--                    </article>-->
                 </div>
             </section>
 
@@ -117,7 +95,7 @@
     </div>
 
     <?php
-    include_once 'includes/footer.inc.vue.php';
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/vue/includes/footer.inc.vue.php';
     ?>
 
 </div>

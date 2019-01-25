@@ -68,7 +68,7 @@
         <section class="col-sm-3">
             <h4>A propos de l'auteur</h4>
             <aside>
-                <img src="https://usatftw.files.wordpress.com/2017/05/spongebob.jpg?w=1000&h=600&crop=1"
+                <img src="https://cdn.iconscout.com/icon/free/png-256/avatar-367-456319.png"
                      alt="Jean Forteroche, auteur de Billet Simple pour l'Alaska" height="160" width="170"
                      class="mx-auto d-block">
                 <h5>Jean Forteroche</h5>

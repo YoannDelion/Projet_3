@@ -6,7 +6,6 @@
  * Time: 18:59
  */
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/bddConnexion.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/autoloader.php';
 
 

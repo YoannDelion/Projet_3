@@ -6,6 +6,6 @@
  * Time: 13:09
  */
 
-foreach (glob($_SERVER['DOCUMENT_ROOT'] . '/model/*') as $fichier) {
-    include $fichier;
-}
+spl_autoload_register(function ($class) {
+    include_once $_SERVER['DOCUMENT_ROOT'] . '/model/' . $class . '.php';
+});

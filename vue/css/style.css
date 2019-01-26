@@ -116,14 +116,34 @@ section h4::before {
     transition-duration: 0.5s;
 }
 
+.submitBtn {
+    margin-top: 20px;
+    background: #ffffff;
+    border: 1px solid #333;
+    display: inline-block;
+    color: #333;
+    padding: 8px 15px;
+    transition-property: background;
+    transition-duration: 0.5s;
+}
+
+.erreur-form{
+    border: 2px solid red !important;
+}
+
+.erreur-text{
+    color: red !important;
+}
+
 .readAll {
     margin-left: auto;
 }
 
-.readMore:hover {
+.readMore:hover, .submitBtn:hover {
     background: #fafafa;
     text-decoration: none;
     color: #333;
+    cursor: pointer;
 }
 
 .readAll {

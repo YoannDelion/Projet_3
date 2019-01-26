@@ -21,7 +21,7 @@
     <!-- MENU -->
     <div class="row">
         <?php
-        include_once $_SERVER['DOCUMENT_ROOT'] . '/vue/includes/menu.inc.vue.php';
+        include_once __DIR__ . '/includes/menu.inc.vue.php';
         ?>
     </div>
 
@@ -83,11 +83,51 @@
 
                 <div class="col-sm-6">
                     <h4>Publier un commentaire</h4>
-                    <div class="alert alert-primary text-center">
-                        <b>Vous devez être <a href="/connexion">connecté</a> pour écrire un commentaire !</b>
-                    </div>
-<!--                    <article class="post">-->
-<!--                    </article>-->
+                    <article class="post">
+                        <form action='/chapitre?id=<?= $post->getId(); ?>' method="post">
+                            <?php
+                            if (isset($erreursForm['insertion'])) {
+                                echo '<p class="text-danger" style="font-size: large"><b>' . $erreursForm['insertion'] . '</b></p>';
+                            } elseif (isset($erreursForm['success'])) {
+                                echo '<p class="text-success" style="font-size: large"><b>' . $erreursForm['success'] . '</b></p>';
+                            }
+                            ?>
+                            <div class="form-group ">
+                                <label class="control-label " for="author">Votre nom</label>
+                                <input class="form-control <?php if (isset($erreursForm['author'])) {
+                                    echo ' erreur-form';
+                                } ?>" id="author" name="author" type="text"
+                                       required <?php if (isset($_POST['author'])) {
+                                    echo 'value="' . $_POST['author'] . '"';
+                                } ?>/>
+                                <?php
+                                if (isset($erreursForm['author'])) {
+                                    echo '<p class="erreur-text"> ' . $erreursForm['author'] . '</p>';
+                                }
+                                ?>
+                            </div>
+                            <div class="form-group ">
+                                <label class="control-label" for="comment">Commentaire</label>
+                                <textarea class="form-control <?php if (isset($erreursForm['comment'])) {
+                                    echo ' erreur-form';
+                                } ?>" id="comment" name="comment" required><?php if (isset($_POST['comment'])) {
+                                        echo $_POST['comment'];
+                                    } ?></textarea>
+                                <?php
+                                if (isset($erreursForm['comment'])) {
+                                    echo '<p class="erreur-text"> ' . $erreursForm['comment'] . '</p>';
+                                }
+                                ?>
+                            </div>
+                            <div class="form-group">
+                                <div>
+                                    <button class="submitBtn" name="envoyer" value="envoyer" type="submit">
+                                        Envoyer
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </article>
                 </div>
             </section>
 
@@ -95,7 +135,7 @@
     </div>
 
     <?php
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/vue/includes/footer.inc.vue.php';
+    include_once __DIR__ . '/includes/footer.inc.vue.php';
     ?>
 
 </div>

@@ -7,5 +7,5 @@
  */
 
 spl_autoload_register(function ($class) {
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/model/' . $class . '.php';
+    include_once __DIR__ . '/../model/' . $class . '.php';
 });

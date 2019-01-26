@@ -6,11 +6,11 @@
  * Time: 19:13
  */
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/autoloader.php';
+include_once __DIR__ . '/../utils/autoloader.php';
 
 
 $post = new Post();
 $posts = $post->findAll();
 
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/vue/articles.vue.php';
+include_once __DIR__ . '/../vue/articles.vue.php';

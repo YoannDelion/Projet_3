@@ -97,7 +97,7 @@
     </div>
 
     <?php
-    include_once $_SERVER['DOCUMENT_ROOT'] . '/vue/includes/footer.inc.vue.php';
+    include_once __DIR__ . '/includes/footer.inc.vue.php';
     ?>
 
 </div>

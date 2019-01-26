@@ -6,7 +6,7 @@
  * Time: 18:01
  */
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/utils/autoloader.php';
+include_once __DIR__ . '/../utils/autoloader.php';
 
 
-include_once $_SERVER['DOCUMENT_ROOT'] . '/vue/connexion.vue.php';
+include_once __DIR__ . '/../vue/connexion.vue.php';

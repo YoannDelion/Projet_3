@@ -70,6 +70,16 @@ if ($post->getId() === null) {
         }
     }
 
+    if (isset($_POST['report']) && $_POST['report'] === 'report') {
+        $reportedComment = $_POST['reportedComment'];
+        $retour = $comments->report($reportedComment);
+        if ($retour == 0) {
+            $erreurReport = 'Une erreur est survenue, merci de réessayer';
+        } else {
+            $successReport = 'Le commentaire a bien été signalé !';
+        }
+    }
+
     $comments = $comments->findAllByPost($post->getId());
 }
 

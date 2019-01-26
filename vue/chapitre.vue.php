@@ -61,13 +61,35 @@
                 <div class="col-sm-6">
                     <h4>Commentaires</h4>
                     <?php
+
+                    if (isset($erreurReport)) {
+                        echo '<p class="text-danger" style="font-size: large"><b>' . $erreurReport . '</b></p>';
+                    } elseif (isset($successReport)) {
+                        echo '<p class="text-success" style="font-size: large"><b>' . $successReport . '</b></p>';
+                    }
+
                     if (isset($comments) && count($comments) > 0) {
                         foreach ($comments as $comment) {
                             ?>
                             <article class="post">
                                 <h5><?= $comment->getAuthor(); ?></h5>
                                 <p class="text-right">Publié le <?= $comment->getCreatedAt(); ?></p>
-                                <p><?= $comment->getComment(); ?></p>
+                                <p>
+                                    <?php
+                                    if ($comment->isReported() == true) {
+                                        echo '<i>Ce commentaire a été signalé, nous sommes en train de l\'analyser.</i>';
+                                    } else {
+                                    echo $comment->getComment();
+                                    ?>
+                                </p>
+                                <form action='/chapitre?id=<?= $post->getId(); ?>' method="post">
+                                    <input type="hidden" name="reportedComment" value="<?= $comment->getId(); ?>">
+                                    <button type="submit" class="btn btn-light text-secondary font-weight-light btn-sm"
+                                            name="report" value="report">
+                                        <i>Signaler ce commentaire</i>
+                                    </button>
+                                </form>
+                                <?php } ?>
                             </article>
 
                             <?php

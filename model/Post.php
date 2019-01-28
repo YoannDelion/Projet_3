@@ -292,6 +292,31 @@ class Post extends BddConnexion
     }
 
     /**
+     * @param $page
+     * @return Post[]
+     */
+    public function findByPage($offset)
+    {
+        $req = $this->bdd->prepare('SELECT id, author, title, content, createdAt, updated, updatedAt, reported, reportedAt FROM post ORDER BY id DESC LIMIT 2 OFFSET :offset');
+        $req->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $req->execute();
+        while($datas = $req->fetch()){
+            $post = new Post();
+            $post->setId($datas['id']);
+            $post->setAuthor($datas['author']);
+            $post->setTitle($datas['title']);
+            $post->setContent($datas['content']);
+            $post->setCreatedAt($datas['createdAt']);
+            $post->setUpdated($datas['updated']);
+            $post->setUpdatedAt($datas['updatedAt']);
+            $post->setReported($datas['reported']);
+            $post->setReportedAt($datas['reportedAt']);
+            $listPosts[] = $post;
+        }
+        return $listPosts;
+    }
+
+    /**
      * @param Post $post
      * @return int
      * retourne 0 si erreur lors de la mise a jour

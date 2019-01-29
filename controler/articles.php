@@ -14,9 +14,9 @@ $nbPosts = $post->findAll();
 $nbPosts = count($nbPosts);
 
 //définit le nombre de posts par pages
-$postsParPage = 2;
+$postsParPage = 5;
 
-$nbPages = $nbPosts/$postsParPage;
+$nbPages = ceil($nbPosts/$postsParPage);
 
 if (!(isset($_GET['page'])) || !(is_numeric($_GET['page'])) || $_GET['page']<0 || $_GET['page']>ceil($nbPages) || $_GET['page']==0) {
     $page = 1;
@@ -25,7 +25,7 @@ if (!(isset($_GET['page'])) || !(is_numeric($_GET['page'])) || $_GET['page']<0 |
 }
 
 $offset = $postsParPage * ($page-1);
-$posts = $post->findByPage($offset);
+$posts = $post->findByPage($postsParPage, $offset);
 
 
 include_once __DIR__ . '/../vue/articles.vue.php';

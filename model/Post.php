@@ -295,9 +295,10 @@ class Post extends BddConnexion
      * @param $page
      * @return Post[]
      */
-    public function findByPage($offset)
+    public function findByPage($limit, $offset)
     {
-        $req = $this->bdd->prepare('SELECT id, author, title, content, createdAt, updated, updatedAt, reported, reportedAt FROM post ORDER BY id DESC LIMIT 2 OFFSET :offset');
+        $req = $this->bdd->prepare('SELECT id, author, title, content, createdAt, updated, updatedAt, reported, reportedAt FROM post ORDER BY id DESC LIMIT :limit OFFSET :offset');
+        $req->bindValue(':limit', $limit, PDO::PARAM_INT);
         $req->bindValue(':offset', $offset, PDO::PARAM_INT);
         $req->execute();
         while($datas = $req->fetch()){

@@ -56,7 +56,21 @@
                 }
                 ?>
             </div>
+
         </section>
+        <div class="row mb-4">
+            <div class="mx-auto">
+                <a class="submitBtn" href="/articles?page=<?= ($page-1); ?>"
+                    <?php if ($page == 1) { echo 'hidden';}?> >
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+                <span class="submitBtn"><?= $page; ?></span>
+                <a class="submitBtn" href="/articles?page=<?= ($page+1); ?>"
+                    <?php if ($page == $nbPages) { echo 'hidden';}?> >
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+        </div>
     </div>
 
     <?php

@@ -10,7 +10,9 @@ include_once __DIR__ . '/../utils/autoloader.php';
 
 
 $post = new Post();
-$posts = $post->findLatest();
+
+//On récupère les trois derniers posts publiés
+$posts = $post->findByPage(3,0);
 
 
 include_once __DIR__ . '/../vue/accueil.vue.php';

@@ -22,7 +22,12 @@
         <div class="card">
             <div class="card-header">Connexion</div>
             <div class="card-body">
-                <form method="" action="">
+                <form method="post" action="/connexion">
+                    <?php
+                    if((isset($erreur) && $erreur>0)){
+                        echo '<p class="erreur-text text-center" style="font-weight: bold">Identifiant et/ou mot de passe incorrect</p>';
+                    }
+                    ?>
                     <div class="form-group">
                         <div class="form-label-group">
                             <input type="text" id="identifiant" class="form-control" placeholder="Identifiant"
@@ -38,8 +43,6 @@
                         </div>
                     </div>
                     <button class="btn btn-primary btn-block" name="connexion" value="connexion">Go</button>
-<!--                    <p class="text-center" style="padding-top: 15px"><a href="/passwordLost">Mot de passe oublié ?</a>-->
-<!--                    </p>-->
                 </form>
             </div>
         </div>

@@ -8,5 +8,13 @@
 
 include_once __DIR__ . '/../utils/autoloader.php';
 
+session_start();
+
+
+if (!isset($_SESSION['identifiant'])) {
+    header('Location: /connexion');
+    exit();
+}
+
 
 include_once __DIR__ . '/../vue/admin.vue.php';

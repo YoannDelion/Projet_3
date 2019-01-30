@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 29 jan. 2019 à 17:53
+-- Généré le :  mer. 30 jan. 2019 à 18:30
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.2.10
 
@@ -115,10 +115,17 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `role` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`id`, `name`, `password`) VALUES
+(1, 'test', '$2y$10$KbmCbFhBDtnmM5qotklCWeBsnaq.s4nCyS97lZTFa3RFcAQ/rvLC.'),
+(2, 'test2', '$2y$10$IMxU4Ox3rCfdXlWPe0S28.KFO8R2ZcX9wimdhMwe606EaC1BLXgCq');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -19,7 +19,7 @@
 <body>
 
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-    <a class="navbar-brand mr-1" href="index.html">Administration</a>
+    <a class="navbar-brand mr-1" href="/admin">Administration</a>
 
     <ul class="push-right navbar-nav ml-auto">
         <li class="nav-item ">

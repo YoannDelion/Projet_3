@@ -23,11 +23,6 @@ class User extends BddConnexion
      */
     private $password;
 
-    /**
-     * @var string
-     * Definit les permissions des utilisateurs
-     */
-    private $role;
 
     /**
      * @return int
@@ -78,21 +73,6 @@ class User extends BddConnexion
         $this->password = $password;
     }
 
-    /**
-     * @return string
-     */
-    public function getRole()
-    {
-        return $this->role;
-    }
-
-    /**
-     * @param string $role
-     */
-    public function setRole($role)
-    {
-        $this->role = $role;
-    }
 
     /**
      * @param User $user
@@ -101,10 +81,9 @@ class User extends BddConnexion
      */
     public function add(User $user)
     {
-        $req = $this->bdd->prepare('INSERT INTO user(name, password, role) VALUES(:name, :password, :role)');
+        $req = $this->bdd->prepare('INSERT INTO user(name, password) VALUES(:name, :password)');
         $req->bindValue(':name', $user->getName(), PDO::PARAM_STR);
         $req->bindValue(':password', $user->getPassword(), PDO::PARAM_STR);
-        $req->bindValue(':role', $user->getRole(), PDO::PARAM_STR);
         $req->execute();
         $retour = $req->rowCount();
 
@@ -118,12 +97,11 @@ class User extends BddConnexion
     {
         $listUsers = [];
 
-        $req = $this->bdd->query('SELECT id, name, role FROM user');
-        while($datas = $req->fetch()){
+        $req = $this->bdd->query('SELECT id, name FROM user');
+        while ($datas = $req->fetch()) {
             $user = new User();
             $user->setId($datas['id']);
             $user->setName($datas['name']);
-            $user->setRole($datas['role']);
             $listUsers[] = $user;
         }
         return $listUsers;
@@ -135,7 +113,7 @@ class User extends BddConnexion
      */
     public function findById($id)
     {
-        $req = $this->bdd->prepare('SELECT id, name, role FROM user WHERE id=:id');
+        $req = $this->bdd->prepare('SELECT id, name FROM user WHERE id=:id');
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
         $data = $req->fetch();
@@ -143,7 +121,6 @@ class User extends BddConnexion
         $user = new User();
         $user->setId($data['id']);
         $user->setName($data['name']);
-        $user->setRole($data['role']);
 
         return $user;
     }
@@ -156,17 +133,17 @@ class User extends BddConnexion
      */
     public function exist($name, $password)
     {
-        $req = $this->bdd->prepare("SELECT id, role FROM user WHERE name = :name AND password =:password");
+        $user = new User();
+
+        $req = $this->bdd->prepare("SELECT id, name, password FROM user WHERE name = :name ");
         $req->bindValue(':name', $name, PDO::PARAM_STR);
-        $req->bindValue(':password', $password, PDO::PARAM_STR);
         $req->execute();
         $data = $req->fetch();
-
-        $user = new User();
-        $user->setId($data['id']);
-        $user->setName($name);
-        $user->setPassword($password);
-        $user->setRole($data['role']);
+        if ( password_verify($password, $data['password'])) {
+            $user->setId($data['id']);
+            $user->setName($data['name']);
+            $user->setPassword($data['password']);
+        }
 
         return $user;
     }
@@ -178,10 +155,9 @@ class User extends BddConnexion
      */
     public function update(User $user)
     {
-        $req = $this->bdd->prepare('UPDATE user SET name=:name, password=:password, role=:role WHERE id=:id');
+        $req = $this->bdd->prepare('UPDATE user SET name=:name, password=:password WHERE id=:id');
         $req->bindValue(':name', $user->getName(), PDO::PARAM_STR);
         $req->bindValue(':password', $user->getPassword(), PDO::PARAM_STR);
-        $req->bindValue(':role', $user->getRole(), PDO::PARAM_STR);
         $req->bindValue(':id', $user->getId(), PDO::PARAM_INT);
         $req->execute();
         $reponse = $req->rowCount();

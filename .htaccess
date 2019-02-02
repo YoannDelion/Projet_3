@@ -8,3 +8,5 @@ RewriteRule ^chapitre                                           controler/chapit
 RewriteRule ^articles                                           controler/articles.php [L]
 RewriteRule ^admin                                              controler/admin.php [L]
 RewriteRule ^connexion                                          controler/connexion.php [L]
+RewriteRule ^addPost                                            controler/addPost.php [L]
+RewriteRule ^managePosts                                        controler/managePosts.php [L]

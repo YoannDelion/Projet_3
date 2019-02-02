@@ -302,7 +302,7 @@ class Post extends BddConnexion
     {
         $req = $this->bdd->prepare('UPDATE post SET title=:title, content=:content, updated=true, updatedAt=NOW() WHERE id=:id');
         $req->bindValue(':id', $post->getId(), PDO::PARAM_INT);
-        $req->bindValue(':title', $post->getContent(), PDO::PARAM_STR);
+        $req->bindValue(':title', $post->getTitle(), PDO::PARAM_STR);
         $req->bindValue(':content', $post->getContent(), PDO::PARAM_STR);
         $req->execute();
         $reponse = $req->rowCount();

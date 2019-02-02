@@ -18,44 +18,18 @@
 
 <body>
 
-<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-    <a class="navbar-brand mr-1" href="/admin">Administration</a>
+<!-- Menu -->
+<?php
+include_once __DIR__ . '/includes/adminMenu.inc.vue.php';
+?>
 
-    <ul class="push-right navbar-nav ml-auto">
-        <li class="nav-item ">
-            <a class="nav-link " href="/accueil">
-                <i class="fas fa-home"></i>
-                <span>Retour à l'accueil</span>
-            </a>
-        </li>
-    </ul>
-</nav>
 
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="sidebar navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-plus-circle"></i>
-                <span>Ajouter un article</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-pen"></i>
-                <span>Modifier un article</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-trash"></i>
-                <span>Supprimer un article</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-comment"></i>
-                <span>Gérer les commentaires</span></a>
-        </li>
-    </ul>
+    <?php
+    include_once __DIR__ . '/includes/adminSidebar.inc.vue.php';
+    ?>
 
 
     <div class="container-fluid">

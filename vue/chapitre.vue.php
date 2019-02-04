@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Articles</title>
 
     <!-- BOOTSTRAP -->
@@ -28,7 +29,6 @@
     <header class="row chapitreBanner">
     </header>
 
-    <div class="content">
 
         <?php
         if ($erreur !== null) { ?>
@@ -154,7 +154,6 @@
             </section>
 
         <?php } ?>
-    </div>
 
     <?php
     include_once __DIR__ . '/includes/footer.inc.vue.php';

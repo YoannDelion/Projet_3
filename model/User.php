@@ -139,7 +139,7 @@ class User extends BddConnexion
         $req->bindValue(':name', $name, PDO::PARAM_STR);
         $req->execute();
         $data = $req->fetch();
-        if ( password_verify($password, $data['password'])) {
+        if (password_verify($password, $data['password'])) {
             $user->setId($data['id']);
             $user->setName($data['name']);
             $user->setPassword($data['password']);

@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Accueil</title>
 
     <!-- BOOTSTRAP -->
@@ -38,7 +39,7 @@
 
     <div id="content" class="row content">
         <section class="col-sm-9 ">
-            <h4>Les derniers chapitres publiés</h4>
+            <h4>Les derniers chapitres</h4>
 
             <?php
             if (isset($posts) && count($posts) > 0) {

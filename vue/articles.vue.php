@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Articles</title>
 
     <!-- BOOTSTRAP -->
@@ -29,7 +30,7 @@
     <header class="row articlesBanner" >
     </header>
 
-    <div class="content ">
+
         <section class="row">
             <div class="mx-auto col-sm-10 ">
 
@@ -71,7 +72,7 @@
                 </a>
             </div>
         </div>
-    </div>
+
 
     <?php
     include_once __DIR__ . '/includes/footer.inc.vue.php';

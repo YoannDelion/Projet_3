@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Administration</title>
 
     <!-- BOOTSTRAP -->
@@ -15,6 +16,15 @@
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="/vue/css/admin.css" rel="stylesheet">
     <link href="/vue/css/style.css" rel="stylesheet">
+
+    <!-- TinyMCE -->
+    <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+    <script>
+        tinymce.init({
+            selector: '#content',
+            language_url: '/vue/langues/fr_FR.js'
+        });
+    </script>
 </head>
 
 <body>
@@ -57,7 +67,7 @@ include_once __DIR__ . '/includes/adminMenu.inc.vue.php';
                 <label class="control-label" for="content">Contenu</label>
                 <textarea class="form-control <?php if (isset($erreursForm['content'])) {
                     echo ' erreur-form';
-                } ?>" id="content" name="content" required><?php if (isset($_POST['content'])) {
+                } ?>" id="content" name="content"><?php if (isset($_POST['content'])) {
                         echo $_POST['content'];
                     } ?></textarea>
                 <?php

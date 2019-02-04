@@ -24,28 +24,24 @@
 include_once __DIR__ . '/includes/adminMenu.inc.vue.php';
 ?>
 
-
 <div id="wrapper">
-
     <!-- Sidebar -->
     <?php
     include_once __DIR__ . '/includes/adminSidebar.inc.vue.php';
     ?>
 
-
     <div class="container">
-
         <?php
         if (isset($erreursForm['insertion'])) {
             echo '<p class="text-danger" style="font-size: large"><b>' . $erreursForm['insertion'] . '</b></p>';
         } elseif (isset($erreursForm['success'])) {
             echo '<p class="text-success" style="font-size: large"><b>' . $erreursForm['success'] . '</b></p>';
         }
+
+        //On affiche le formulaire de modification si l'id correspond bien a un post
         if (isset($postToUpdate) && $postToUpdate->getId() != null) {
             ?>
-
             <form class="mt-4" action='/managePosts?action=modifier&id=<?= $postToUpdate->getId(); ?>' method="post">
-
                 <div class="form-group ">
                     <label class="control-label " for="title">Titre du chapitre</label>
                     <input class="form-control <?php if (isset($erreursForm['title'])) {
@@ -79,10 +75,9 @@ include_once __DIR__ . '/includes/adminMenu.inc.vue.php';
             </form>
 
             <?php
+            //sinon on affiche la liste des posts avec les boutons de modifications et suppression
         } else {
             ?>
-
-
             <div class="table-responsive  mt-4 ">
                 <?php
                 if (isset($success)) {

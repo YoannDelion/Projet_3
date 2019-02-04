@@ -8,8 +8,8 @@
 
 include_once __DIR__ . '/../utils/autoloader.php';
 
-session_start();
 
+session_start();
 if (!isset($_SESSION['identifiant'])) {
     header('Location: /connexion');
     exit();
@@ -17,10 +17,13 @@ if (!isset($_SESSION['identifiant'])) {
 
 $posts = new Post();
 
+//suppression d'un article
 if (isset($_GET['action']) && ($_GET['action'] == "supprimer")) {
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
-        $return = $posts->delete($id);
+
+        $return = $posts->delete($id); //renvoie 0 si il n'y a pas eu de modification en bdd
+
         if ($return != 0) {
             $success = "Chapitre supprimé avec succès";
         } else {
@@ -29,7 +32,10 @@ if (isset($_GET['action']) && ($_GET['action'] == "supprimer")) {
     } else {
         $error = "Une erreur est survenue merci de réessayer";
     }
-} elseif (isset($_GET['action']) && ($_GET['action'] == "modifier")) {
+}
+
+//modification d'un article
+elseif (isset($_GET['action']) && ($_GET['action'] == "modifier")) {
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
 
@@ -43,7 +49,7 @@ if (isset($_GET['action']) && ($_GET['action'] == "supprimer")) {
                 $title = '';
             }
             if (strlen($title) === 0) {
-                $erreursForm['title'] = "Le titre du chapitre est obligatoire";
+                $erreursForm['title'] = "Le titre du chapitre est obligatoire !";
             } elseif (strlen($title) < 2) {
                 $erreursForm['title'] = 'Le champ est trop court';
             } elseif (strlen($title) > 255) {
@@ -69,7 +75,7 @@ if (isset($_GET['action']) && ($_GET['action'] == "supprimer")) {
                 $updatePost->setContent($content);
                 $updatePost->setId($id);
 
-                $retour = $updatePost->update($updatePost);
+                $retour = $updatePost->update($updatePost); //renvoie 0 si il n'y a pas eu de modification en bdd
 
                 if ($retour == 0) {
                     $erreursForm['insertion'] = "Erreur lors de la modification, merci de réessayer";
@@ -88,7 +94,7 @@ if (isset($_GET['action']) && ($_GET['action'] == "supprimer")) {
     }
 }
 
-
 $posts = $posts->findAll();
+
 
 include_once __DIR__ . '/../vue/managePost.vue.php';

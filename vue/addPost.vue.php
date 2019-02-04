@@ -24,17 +24,13 @@
 include_once __DIR__ . '/includes/adminMenu.inc.vue.php';
 ?>
 
-
 <div id="wrapper">
-
     <!-- Sidebar -->
     <?php
     include_once __DIR__ . '/includes/adminSidebar.inc.vue.php';
     ?>
 
-
     <div class="container">
-
         <form class="mt-4" action='/addPost' method="post">
             <?php
             if (isset($erreursForm['insertion'])) {

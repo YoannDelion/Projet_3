@@ -8,8 +8,8 @@
 
 include_once __DIR__ . '/../utils/autoloader.php';
 
-session_start();
 
+session_start();
 if (!isset($_SESSION['identifiant'])) {
     header('Location: /connexion');
     exit();
@@ -46,11 +46,11 @@ if (isset($_POST['envoyer']) && $_POST['envoyer'] === 'envoyer') {
     }
 
     if (count($erreursForm) === 0) {
-        //ajout du nouveau contentairen bdd
+        //ajout du nouveau post en bdd
         $addPost = new Post();
         $addPost->setAuthor($_SESSION['identifiant']);
-        $addPost->settitle($title);
-        $addPost->setcontent($content);
+        $addPost->setTitle($title);
+        $addPost->setContent($content);
 
         $retour = $addPost->add($addPost);
 
@@ -59,11 +59,10 @@ if (isset($_POST['envoyer']) && $_POST['envoyer'] === 'envoyer') {
         } else {
             $erreursForm['success'] = 'Le chapitre a bien été publié !';
         }
+        //On vide la variable post, pour éviter que l'admin ré envoie le même post
         unset($_POST);
     }
 }
-
-
 
 
 include_once __DIR__ . '/../vue/addPost.vue.php';

@@ -41,50 +41,41 @@ include_once __DIR__ . '/includes/adminMenu.inc.vue.php';
     ?>
 
     <div class="container">
-        <h3>Publier un chapitre</h3>
-        <form class="mt-4" action='/addPost' method="post">
+        <h3>Commentaires signalés</h3>
+        <div class="row">
             <?php
-            if (isset($erreursForm['insertion'])) {
-                echo '<div class="alert alert-danger mx-auto text-center" style="font-size: large"><b>' . $erreursForm['insertion'] . '</b></div>';
-            } elseif (isset($erreursForm['success'])) {
-                echo '<div class="alert alert-success mx-auto text-center" style="font-size: large"><b>' . $erreursForm['success'] . '</b></div>';
+            if (isset($erreur)) {
+                echo '<div class="alert alert-danger text-center mx-auto" style="font-size: large"><b>' . $erreur . '</b></div>';
+            } elseif (isset($success)) {
+                echo '<div class="alert alert-success text-center mx-auto" style="font-size: large"><b>' . $success . '</b></div>';
             }
             ?>
-            <div class="form-group ">
-                <label class="control-label " for="title">Titre du chapitre</label>
-                <input class="form-control <?php if (isset($erreursForm['title'])) {
-                    echo ' erreur-form';
-                } ?>" id="title" name="title" type="text"
-                       required <?php if (isset($_POST['title'])) {
-                    echo 'value="' . $_POST['title'] . '"';
-                } ?>/>
-                <?php
-                if (isset($erreursForm['title'])) {
-                    echo '<p class="erreur-text"> ' . $erreursForm['title'] . '</p>';
+        </div>
+        <div class="row">
+            <?php
+            if (isset($reports) && count($reports) > 0) {
+                foreach ($reports as $report) {
+                    ?>
+                    <div class="card col-6 col-sm-3" >
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">Signalé le : <?= $report->getCreatedAt(); ?></h6>
+                            <p class="card-text"><?= $report->getComment(); ?></p>
+                            <a href="/manageComments?action=valider&id=<?= $report->getId(); ?>" class="btn btn-primary">Valider</a>
+                            <a href="/manageComments?action=supprimer&id=<?= $report->getId(); ?>" class="btn btn-danger">Supprimer</a>
+                        </div>
+                    </div>
+                    <?php
                 }
-                ?>
-            </div>
-            <div class="form-group ">
-                <label class="control-label" for="content">Contenu</label>
-                <textarea class="form-control <?php if (isset($erreursForm['content'])) {
-                    echo ' erreur-form';
-                } ?>" id="content" name="content"><?php if (isset($_POST['content'])) {
-                        echo $_POST['content'];
-                    } ?></textarea>
-                <?php
-                if (isset($erreursForm['content'])) {
-                    echo '<p class="erreur-text"> ' . $erreursForm['content'] . '</p>';
-                }
-                ?>
-            </div>
-            <div class="form-group">
-                <div>
-                    <button class="btn btn-primary" name="envoyer" value="envoyer" type="submit">
-                        Publier le chapitre
-                    </button>
+            } else { ?>
+                <div class="alert alert-primary text-center mx-auto">
+                    <b>Aucun commentaire n'a été signalé !</b>
                 </div>
-            </div>
-        </form>
+                <?php
+            }
+            ?>
+
+        </div>
+
 
     </div>
     <!-- /.container -->

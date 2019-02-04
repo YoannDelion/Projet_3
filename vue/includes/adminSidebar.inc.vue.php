@@ -10,7 +10,7 @@
             <span>Gérer les articles</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/manageComments">
             <i class="fas fa-comment"></i>
             <span>Gérer les commentaires</span></a>
     </li>

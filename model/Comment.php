@@ -257,7 +257,7 @@ class Comment extends BddConnexion
             $report->setPostId($datas['postId']);
             $report->setAuthor($datas['author']);
             $report->setComment($datas['comment']);
-            $report->setCreatedAt($datas['identifiant']);
+            $report->setCreatedAt($datas['createdAt']);
             $report->setUpdated($datas['updated']);
             $report->setUpdatedAt($datas['updatedAt']);
             $report->setReported($datas['reported']);
@@ -298,6 +298,24 @@ class Comment extends BddConnexion
 
         return $reponse;
     }
+
+    /**
+     * @param $commentId
+     * @return int
+     * enleve le signalement d'un commentaire
+     * retourne 0 si erreur lors de la modification
+     */
+    public function unreport($commentId)
+    {
+        $req = $this->bdd->prepare("UPDATE comment SET reported=false,  reportedAt=null WHERE id=:id");
+        $req->bindValue(':id', $commentId, PDO::PARAM_INT);
+        $req->execute();
+        $reponse = $req->rowCount();
+
+        return $reponse;
+    }
+
+
 
     /**
      * @param $id

@@ -41,11 +41,12 @@ include_once __DIR__ . '/includes/adminMenu.inc.vue.php';
     ?>
 
     <div class="container">
+        <h3>Chapitres publiés</h3>
         <?php
         if (isset($erreursForm['insertion'])) {
-            echo '<p class="text-danger" style="font-size: large"><b>' . $erreursForm['insertion'] . '</b></p>';
+            echo '<div class="alert alert-danger mx-auto text-center" style="font-size: large"><b>' . $erreursForm['insertion'] . '</b></div>';
         } elseif (isset($erreursForm['success'])) {
-            echo '<p class="text-success" style="font-size: large"><b>' . $erreursForm['success'] . '</b></p>';
+            echo '<div class="alert alert-success mx-auto text-center" style="font-size: large"><b>' . $erreursForm['success'] . '</b></div>';
         }
 
         //On affiche le formulaire de modification si l'id correspond bien a un post
@@ -91,9 +92,9 @@ include_once __DIR__ . '/includes/adminMenu.inc.vue.php';
             <div class="table-responsive  mt-4 ">
                 <?php
                 if (isset($success)) {
-                    echo '<p class="text-success" style="font-size: large"><b>' . $success . '</b></p>';
+                    echo '<div class="alert alert-success" style="font-size: large"><b>' . $success . '</b></div>';
                 } elseif (isset($error)) {
-                    echo '<p class="text-danger" style="font-size: large"><b>' . $error . '</b></p>';
+                    echo '<div class="alert alert-danger" style="font-size: large"><b>' . $error . '</b></div>';
                 }
                 ?>
                 <table class="table table-striped table-hover text-center">

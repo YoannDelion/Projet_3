@@ -63,9 +63,9 @@
                     <?php
 
                     if (isset($erreurReport)) {
-                        echo '<p class="text-danger" style="font-size: large"><b>' . $erreurReport . '</b></p>';
+                        echo '<div class="alert alert-danger text-center mx-auto" style="font-size: large"><b>' . $erreurReport . '</b></div>';
                     } elseif (isset($successReport)) {
-                        echo '<p class="text-success" style="font-size: large"><b>' . $successReport . '</b></p>';
+                        echo '<div class="alert alert-success text-center mx-auto" style="font-size: large"><b>' . $successReport . '</b></div>';
                     }
 
                     if (isset($comments) && count($comments) > 0) {
@@ -95,7 +95,7 @@
                             <?php
                         }
                     } else { ?>
-                        <div class="alert alert-warning text-center">
+                        <div class="alert alert-warning text-center mx-auto">
                             <b>Aucun commentaire pour ce chapitre.</b>
                         </div>
                         <?php
@@ -109,9 +109,9 @@
                         <form action='/chapitre?id=<?= $post->getId(); ?>' method="post">
                             <?php
                             if (isset($erreursForm['insertion'])) {
-                                echo '<p class="text-danger" style="font-size: large"><b>' . $erreursForm['insertion'] . '</b></p>';
+                                echo '<div class="alert alert-danger mx-auto text-center" style="font-size: large"><b>' . $erreursForm['insertion'] . '</b></div>';
                             } elseif (isset($erreursForm['success'])) {
-                                echo '<p class="text-success" style="font-size: large"><b>' . $erreursForm['success'] . '</b></p>';
+                                echo '<div class="alert alert-success mx-auto text-center" style="font-size: large"><b>' . $erreursForm['success'] . '</b></div>';
                             }
                             ?>
                             <div class="form-group ">

@@ -50,7 +50,7 @@
                         <?php
                     }
                 } else { ?>
-                    <div class="alert alert-warning text-center">
+                    <div class="alert alert-warning text-center mx-auto">
                         <b>Aucun article n'a été publié pour le moment !</b>
                     </div>
                     <?php

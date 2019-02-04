@@ -10,3 +10,4 @@ RewriteRule ^admin                                              controler/admin.
 RewriteRule ^connexion                                          controler/connexion.php [L]
 RewriteRule ^addPost                                            controler/addPost.php [L]
 RewriteRule ^managePosts                                        controler/managePosts.php [L]
+RewriteRule ^manageComments                                     controler/manageComments.php [L]

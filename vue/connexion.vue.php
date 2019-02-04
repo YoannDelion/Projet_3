@@ -26,7 +26,7 @@
                 <form method="post" action="/connexion">
                     <?php
                     if((isset($erreur) && $erreur>0)){
-                        echo '<p class="erreur-text text-center" style="font-weight: bold">Identifiant et/ou mot de passe incorrect</p>';
+                        echo '<div class="alert alert danger mx-auto text-center" style="font-weight: bold">Identifiant et/ou mot de passe incorrect</div>';
                     }
                     ?>
                     <div class="form-group">

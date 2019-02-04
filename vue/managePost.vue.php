@@ -15,6 +15,15 @@
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="/vue/css/admin.css" rel="stylesheet">
     <link href="/vue/css/style.css" rel="stylesheet">
+
+    <!-- TinyMCE -->
+    <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+    <script>
+        tinymce.init({
+            selector: '#content',
+            language_url: '/vue/langues/fr_FR.js'
+        });
+    </script>
 </head>
 
 <body>

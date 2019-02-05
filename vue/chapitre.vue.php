@@ -49,7 +49,7 @@
                 <div class="col-12 ">
                     <article class="post ">
                         <h2><?= $post->getTitle(); ?></h2>
-                        <p class="text-right">Publié le <?= $post->getCreatedAt(); ?></p>
+                        <p class="text-right">Publié le <?= date("d-m-Y à H:i", strtotime($post->getCreatedAt())); ?></p>
                         <p><?= $post->getContent(); ?>
                         </p>
                     </article>
@@ -73,7 +73,7 @@
                             ?>
                             <article class="post">
                                 <h5><?= $comment->getAuthor(); ?></h5>
-                                <p class="text-right">Publié le <?= $comment->getCreatedAt(); ?></p>
+                                <p class="text-right">Publié le <?= date("d-m-Y à H:i", strtotime($comment->getCreatedAt())); ?></p>
                                 <p>
                                     <?php
                                     if ($comment->isReported() == true) {

@@ -47,7 +47,14 @@
                     ?>
                     <article class="post">
                         <h5><?= $post->getTitle(); ?></h5>
-                        <p class="text-right">Publié le <?= $post->getCreatedAt(); ?></p>
+
+
+
+                        <p class="text-right">Publié le <?= date("d-m-Y à H:i", strtotime($post->getCreatedAt())); ?></p>
+
+
+
+
                         <p><?= strip_tags(html_entity_decode(mb_substr($post->getContent(), 0, 200))).'...'; ?></p>
                         <a href="/chapitre?id=<?= $post->getId(); ?>" class="readMore">Lire la suite <span
                                     class="fas fa-arrow-right"></span></a>

@@ -6,7 +6,7 @@
  * Time: 18:13
  */
 
-class Post extends BddConnexion
+class Post
 {
     /**
      * @var int
@@ -207,7 +207,8 @@ class Post extends BddConnexion
      */
     public function add(Post $post)
     {
-        $req = $this->bdd->prepare('INSERT INTO post(author, title, content, createdAt) VALUES(:author, :title, :content, NOW())');
+        $bdd = BddConnexion::getInstance();
+        $req = $bdd->prepare('INSERT INTO post(author, title, content, createdAt) VALUES(:author, :title, :content, NOW())');
         $req->bindValue(':author', $post->getAuthor(), PDO::PARAM_STR);
         $req->bindValue(':title', $post->getTitle(), PDO::PARAM_STR);
         $req->bindValue(':content', $post->getContent(), PDO::PARAM_STR);
@@ -224,7 +225,8 @@ class Post extends BddConnexion
     {
         $listPosts = [];
 
-        $req = $this->bdd->query('SELECT id, author, title, content, createdAt, updated, updatedAt, reported, reportedAt FROM post ORDER BY id DESC');
+        $bdd = BddConnexion::getInstance();
+        $req = $bdd->query('SELECT id, author, title, content, createdAt, updated, updatedAt, reported, reportedAt FROM post ORDER BY id DESC');
         while($datas = $req->fetch()){
             $post = new Post();
             $post->setId($datas['id']);
@@ -247,7 +249,8 @@ class Post extends BddConnexion
      */
     public function findById($id)
     {
-        $req = $this->bdd->prepare('SELECT id, author, title, content, createdAt, updated, updatedAt, reported, reportedAt FROM post WHERE id=:id');
+        $bdd = BddConnexion::getInstance();
+        $req = $bdd->prepare('SELECT id, author, title, content, createdAt, updated, updatedAt, reported, reportedAt FROM post WHERE id=:id');
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
         $data = $req->fetch();
@@ -273,7 +276,10 @@ class Post extends BddConnexion
      */
     public function findByPage($limit, $offset)
     {
-        $req = $this->bdd->prepare('SELECT id, author, title, content, createdAt, updated, updatedAt, reported, reportedAt FROM post ORDER BY id DESC LIMIT :limit OFFSET :offset');
+        $listPosts = [];
+
+        $bdd = BddConnexion::getInstance();
+        $req = $bdd->prepare('SELECT id, author, title, content, createdAt, updated, updatedAt, reported, reportedAt FROM post ORDER BY id DESC LIMIT :limit OFFSET :offset');
         $req->bindValue(':limit', $limit, PDO::PARAM_INT);
         $req->bindValue(':offset', $offset, PDO::PARAM_INT);
         $req->execute();
@@ -300,7 +306,8 @@ class Post extends BddConnexion
      */
     public function update(Post $post)
     {
-        $req = $this->bdd->prepare('UPDATE post SET title=:title, content=:content, updated=true, updatedAt=NOW() WHERE id=:id');
+        $bdd = BddConnexion::getInstance();
+        $req = $bdd->prepare('UPDATE post SET title=:title, content=:content, updated=true, updatedAt=NOW() WHERE id=:id');
         $req->bindValue(':id', $post->getId(), PDO::PARAM_INT);
         $req->bindValue(':title', $post->getTitle(), PDO::PARAM_STR);
         $req->bindValue(':content', $post->getContent(), PDO::PARAM_STR);
@@ -319,7 +326,8 @@ class Post extends BddConnexion
      */
     public function report($postId)
     {
-        $req = $this->bdd->prepare("UPDATE post SET reported=true, reportedAt=NOW() WHERE id=:id");
+        $bdd = BddConnexion::getInstance();
+        $req = $bdd->prepare("UPDATE post SET reported=true, reportedAt=NOW() WHERE id=:id");
         $req->bindValue(':id', $postId, PDO::PARAM_INT);
         $req->execute();
         $reponse = $req->rowCount();
@@ -334,7 +342,8 @@ class Post extends BddConnexion
      */
     public function delete($id)
     {
-        $req = $this->bdd->prepare("DELETE FROM post WHERE id=:id");
+        $bdd = BddConnexion::getInstance();
+        $req = $bdd->prepare("DELETE FROM post WHERE id=:id");
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
         $reponse = $req->rowCount();

@@ -6,7 +6,7 @@
  * Time: 18:08
  */
 
-class User extends BddConnexion
+class User
 {
     /**
      * @var int
@@ -81,7 +81,8 @@ class User extends BddConnexion
      */
     public function add(User $user)
     {
-        $req = $this->bdd->prepare('INSERT INTO user(name, password) VALUES(:name, :password)');
+        $bdd = BddConnexion::getInstance();
+        $req = $bdd->prepare('INSERT INTO user(name, password) VALUES(:name, :password)');
         $req->bindValue(':name', $user->getName(), PDO::PARAM_STR);
         $req->bindValue(':password', $user->getPassword(), PDO::PARAM_STR);
         $req->execute();
@@ -97,7 +98,8 @@ class User extends BddConnexion
     {
         $listUsers = [];
 
-        $req = $this->bdd->query('SELECT id, name FROM user');
+        $bdd = BddConnexion::getInstance();
+        $req = $bdd->query('SELECT id, name FROM user');
         while ($datas = $req->fetch()) {
             $user = new User();
             $user->setId($datas['id']);
@@ -113,7 +115,8 @@ class User extends BddConnexion
      */
     public function findById($id)
     {
-        $req = $this->bdd->prepare('SELECT id, name FROM user WHERE id=:id');
+        $bdd = BddConnexion::getInstance();
+        $req = $bdd->prepare('SELECT id, name FROM user WHERE id=:id');
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
         $data = $req->fetch();
@@ -135,7 +138,8 @@ class User extends BddConnexion
     {
         $user = new User();
 
-        $req = $this->bdd->prepare("SELECT id, name, password FROM user WHERE name = :name ");
+        $bdd = BddConnexion::getInstance();
+        $req = $bdd->prepare("SELECT id, name, password FROM user WHERE name = :name ");
         $req->bindValue(':name', $name, PDO::PARAM_STR);
         $req->execute();
         $data = $req->fetch();
@@ -155,7 +159,8 @@ class User extends BddConnexion
      */
     public function update(User $user)
     {
-        $req = $this->bdd->prepare('UPDATE user SET name=:name, password=:password WHERE id=:id');
+        $bdd = BddConnexion::getInstance();
+        $req = $bdd->prepare('UPDATE user SET name=:name, password=:password WHERE id=:id');
         $req->bindValue(':name', $user->getName(), PDO::PARAM_STR);
         $req->bindValue(':password', $user->getPassword(), PDO::PARAM_STR);
         $req->bindValue(':id', $user->getId(), PDO::PARAM_INT);
@@ -172,7 +177,8 @@ class User extends BddConnexion
      */
     public function delete($id)
     {
-        $req = $this->bdd->prepare("DELETE FROM user WHERE id=:id");
+        $bdd = BddConnexion::getInstance();
+        $req = $bdd->prepare("DELETE FROM user WHERE id=:id");
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
         $reponse = $req->rowCount();

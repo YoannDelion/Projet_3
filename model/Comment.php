@@ -6,7 +6,7 @@
  * Time: 18:16
  */
 
-class Comment extends BddConnexion
+class Comment
 {
     /**
      * @var int
@@ -206,7 +206,8 @@ class Comment extends BddConnexion
      */
     public function add(Comment $comment)
     {
-        $req = $this->bdd->prepare('INSERT INTO comment(postId, author, comment, createdAt) VALUES(:postId, :author, :comment, NOW())');
+        $bdd = BddConnexion::getInstance();
+        $req = $bdd->prepare('INSERT INTO comment(postId, author, comment, createdAt) VALUES(:postId, :author, :comment, NOW())');
         $req->bindValue(':postId', $comment->getPostId(), PDO::PARAM_INT);
         $req->bindValue(':author', $comment->getAuthor(), PDO::PARAM_STR);
         $req->bindValue(':comment', $comment->getComment(), PDO::PARAM_STR);
@@ -223,7 +224,8 @@ class Comment extends BddConnexion
     {
         $listComments = [];
 
-        $req = $this->bdd->query('SELECT id, postId, author, comment, createdAt, updated, updatedAt, reported, reportedAt FROM comment');
+        $bdd = BddConnexion::getInstance();
+        $req = $bdd->query('SELECT id, postId, author, comment, createdAt, updated, updatedAt, reported, reportedAt FROM comment');
         while($datas = $req->fetch()){
             $comment = new Comment();
             $comment->setId($datas['id']);
@@ -248,7 +250,8 @@ class Comment extends BddConnexion
     {
         $listComments = [];
 
-        $req = $this->bdd->prepare('SELECT id, postId, author, comment, createdAt, updated, updatedAt, reported, reportedAt FROM comment WHERE postId=:postId ORDER BY id DESC ');
+        $bdd = BddConnexion::getInstance();
+        $req = $bdd->prepare('SELECT id, postId, author, comment, createdAt, updated, updatedAt, reported, reportedAt FROM comment WHERE postId=:postId ORDER BY id DESC ');
         $req->bindValue('postId', $postId, PDO::PARAM_INT);
         $req->execute();
         while($datas = $req->fetch()){
@@ -274,7 +277,8 @@ class Comment extends BddConnexion
     {
         $listeReports = [];
 
-        $req = $this->bdd->query("SELECT id, postId, author, comment, createdAt, updated, updatedAt, reported, reportedAt FROM comment WHERE reported=true ORDER BY reportedAt DESC");
+        $bdd = BddConnexion::getInstance();
+        $req = $bdd->query("SELECT id, postId, author, comment, createdAt, updated, updatedAt, reported, reportedAt FROM comment WHERE reported=true ORDER BY reportedAt DESC");
         while($datas = $req->fetch()){
             $report = new Comment();
             $report->setId($datas['id']);
@@ -298,7 +302,8 @@ class Comment extends BddConnexion
      */
     public function update(Comment $comment)
     {
-        $req = $this->bdd->prepare("UPDATE comment SET comment=:comment,  updated=true, updatedAt=NOW() WHERE id=:id");
+        $bdd = BddConnexion::getInstance();
+        $req = $bdd->prepare("UPDATE comment SET comment=:comment,  updated=true, updatedAt=NOW() WHERE id=:id");
         $req->bindValue(':comment', $comment->getComment(), PDO::PARAM_STR);
         $req->bindValue(':id', $comment->getId(), PDO::PARAM_INT);
         $req->execute();
@@ -315,7 +320,8 @@ class Comment extends BddConnexion
      */
     public function report($commentId)
     {
-        $req = $this->bdd->prepare("UPDATE comment SET reported=true,  reportedAt=NOW() WHERE id=:id");
+        $bdd = BddConnexion::getInstance();
+        $req = $bdd->prepare("UPDATE comment SET reported=true,  reportedAt=NOW() WHERE id=:id");
         $req->bindValue(':id', $commentId, PDO::PARAM_INT);
         $req->execute();
         $reponse = $req->rowCount();
@@ -331,7 +337,8 @@ class Comment extends BddConnexion
      */
     public function unreport($commentId)
     {
-        $req = $this->bdd->prepare("UPDATE comment SET reported=false,  reportedAt=null WHERE id=:id");
+        $bdd = BddConnexion::getInstance();
+        $req = $bdd->prepare("UPDATE comment SET reported=false,  reportedAt=null WHERE id=:id");
         $req->bindValue(':id', $commentId, PDO::PARAM_INT);
         $req->execute();
         $reponse = $req->rowCount();
@@ -348,7 +355,8 @@ class Comment extends BddConnexion
      */
     public function delete($id)
     {
-        $req = $this->bdd->prepare("DELETE FROM comment WHERE id=:id");
+        $bdd = BddConnexion::getInstance();
+        $req = $bdd->prepare("DELETE FROM comment WHERE id=:id");
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
         $reponse = $req->rowCount();

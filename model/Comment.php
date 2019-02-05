@@ -217,6 +217,30 @@ class Comment extends BddConnexion
     }
 
     /**
+     * @return Comment[]
+     */
+    public function findAll()
+    {
+        $listComments = [];
+
+        $req = $this->bdd->query('SELECT id, postId, author, comment, createdAt, updated, updatedAt, reported, reportedAt FROM comment');
+        while($datas = $req->fetch()){
+            $comment = new Comment();
+            $comment->setId($datas['id']);
+            $comment->setPostId($datas['postId']);
+            $comment->setAuthor($datas['author']);
+            $comment->setComment($datas['comment']);
+            $comment->setCreatedAt($datas['createdAt']);
+            $comment->setUpdated($datas['updated']);
+            $comment->setUpdatedAt($datas['updatedAt']);
+            $comment->setReported($datas['reported']);
+            $comment->setReportedAt($datas['reportedAt']);
+            $listComments[] = $comment;
+        }
+        return $listComments;
+    }
+
+    /**
      * @param $postId
      * @return array
      */

@@ -35,7 +35,19 @@ include_once __DIR__ . '/includes/adminMenu.inc.vue.php';
 
     <div class="container-fluid">
 
-        <p>ok</p>
+        <h2>Bonjour <?= $_SESSION['identifiant']; ?> !</h2>
+
+        <p>Il y a <b><?= $nbArticles; ?></b> articles publiés sur le site.</p>
+        <p><b><?= $nbCommentaires; ?></b> commentaires ont été publiés par des visiteurs.</p>
+        <?php
+        if (isset($nbReports) && $nbReports>0) {
+            if ($nbReports>1) { ?>
+            <p><b><?= $nbReports; ?></b> sont signalés, vous devez les analyser.</p>
+        <?php } else { ?>
+                <p><b><?= $nbReports; ?></b> a été signalé, vous devez l'analyser.</p>
+            <?php }
+        } ?>
+        <p>Rendez-vous sur le menu de gauche pour effectuer différentes actions sur le site !</p>
 
     </div>
     <!-- /.container-fluid -->

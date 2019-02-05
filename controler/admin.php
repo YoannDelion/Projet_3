@@ -16,5 +16,12 @@ if (!isset($_SESSION['identifiant'])) {
     exit();
 }
 
+$posts = new Post();
+$comments = new Comment();
+
+$nbArticles = count($posts->findAll());
+$nbCommentaires = count($comments->findAll());
+$nbReports = count($comments->findAllReported());
+
 
 include_once __DIR__ . '/../vue/admin.vue.php';

@@ -58,7 +58,7 @@ include_once __DIR__ . '/includes/adminMenu.inc.vue.php';
                     ?>
                     <div class="card col-6 col-sm-3" >
                         <div class="card-body">
-                            <h6 class="card-subtitle mb-2 text-muted">Signalé le : <?= $report->getCreatedAt(); ?></h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Signalé le : <?= date("d-m-Y à H:i", strtotime($report->getCreatedAt())); ?></h6>
                             <p class="card-text"><?= $report->getComment(); ?></p>
                             <a href="/manageComments?action=valider&id=<?= $report->getId(); ?>" class="btn btn-primary">Valider</a>
                             <a href="/manageComments?action=supprimer&id=<?= $report->getId(); ?>" class="btn btn-danger">Supprimer</a>

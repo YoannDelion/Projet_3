@@ -32,9 +32,7 @@ if(isset($_GET['id']) && $_GET['id'] != null){
     } else {
         $success = 'La modification a bien été enregistrée !';
     }
-} else {
-    $erreur = "Une erreur est survenue, merci de réessayer";
-}
+} 
 
 $reports = $reports->findAllReported();
 

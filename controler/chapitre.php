@@ -49,9 +49,7 @@ if ($post->getId() === null) {
         } elseif (strlen($comment) < 2) {
             $erreursForm['comment'] = 'Le champ est trop court';
         }
-//    elseif (strlen($comment) > 50) {
-//        $erreursForm['comment'] = 'Le champ est trop long';
-//    }
+
 
         if (count($erreursForm) === 0) {
             //ajout du nouveau commentairen bdd
@@ -66,6 +64,7 @@ if ($post->getId() === null) {
                 $erreursForm['insertion'] = "Erreur lors de l'ajout, merci de réessayer";
             } else {
                 $erreursForm['success'] = 'Votre commentaire a bien été envoyé !';
+                unset($_POST);
             }
         }
     }

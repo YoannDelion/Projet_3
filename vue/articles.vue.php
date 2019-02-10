@@ -41,7 +41,7 @@
                     foreach ($posts as $post) {
                         ?>
                         <article class="post">
-                            <h5><?= $post->getTitle(); ?></h5>
+                            <h5><?= htmlspecialchars($post->getTitle()); ?></h5>
                             <p class="text-right">Publié le <?= date("d-m-Y à H:i", strtotime($post->getCreatedAt())); ?></p>
                             <p><?= strip_tags(html_entity_decode(mb_substr($post->getContent(), 0, 200))).'...'; ?></p>
                             <a href="chapitre?id=<?= $post->getId(); ?>" class="readMore">Lire la suite <span

@@ -56,7 +56,7 @@ include_once __DIR__ . '/includes/adminMenu.inc.vue.php';
                     echo ' erreur-form';
                 } ?>" id="title" name="title" type="text"
                        required <?php if (isset($_POST['title'])) {
-                    echo 'value="' . $_POST['title'] . '"';
+                    echo 'value="' . htmlspecialchars($_POST['title']) . '"';
                 } ?>/>
                 <?php
                 if (isset($erreursForm['title'])) {
@@ -69,7 +69,7 @@ include_once __DIR__ . '/includes/adminMenu.inc.vue.php';
                 <textarea class="form-control <?php if (isset($erreursForm['content'])) {
                     echo ' erreur-form';
                 } ?>" id="content" name="content"><?php if (isset($_POST['content'])) {
-                        echo $_POST['content'];
+                        echo htmlspecialchars($_POST['content']);
                     } ?></textarea>
                 <?php
                 if (isset($erreursForm['content'])) {

@@ -48,7 +48,7 @@
             <section class="row">
                 <div class="col-12 ">
                     <article class="post ">
-                        <h2><?= $post->getTitle(); ?></h2>
+                        <h2><?= htmlspecialchars($post->getTitle()); ?></h2>
                         <p class="text-right">Publié le <?= date("d-m-Y à H:i", strtotime($post->getCreatedAt())); ?></p>
                         <p><?= $post->getContent(); ?>
                         </p>
@@ -72,14 +72,14 @@
                         foreach ($comments as $comment) {
                             ?>
                             <article class="post">
-                                <h5><?= $comment->getAuthor(); ?></h5>
+                                <h5><?= htmlspecialchars($comment->getAuthor()); ?></h5>
                                 <p class="text-right">Publié le <?= date("d-m-Y à H:i", strtotime($comment->getCreatedAt())); ?></p>
                                 <p>
                                     <?php
                                     if ($comment->isReported() == true) {
                                         echo '<i>Ce commentaire a été signalé, nous sommes en train de l\'analyser.</i>';
                                     } else {
-                                    echo $comment->getComment();
+                                    echo htmlspecialchars($comment->getComment());
                                     ?>
                                 </p>
                                 <form action='/chapitre?id=<?= $post->getId(); ?>' method="post">
@@ -120,7 +120,7 @@
                                     echo ' erreur-form';
                                 } ?>" id="author" name="author" type="text"
                                        required <?php if (isset($_POST['author'])) {
-                                    echo 'value="' . $_POST['author'] . '"';
+                                    echo 'value="' . htmlspecialchars($_POST['author']) . '"';
                                 } ?>/>
                                 <?php
                                 if (isset($erreursForm['author'])) {
@@ -133,7 +133,7 @@
                                 <textarea class="form-control <?php if (isset($erreursForm['comment'])) {
                                     echo ' erreur-form';
                                 } ?>" id="comment" name="comment" required><?php if (isset($_POST['comment'])) {
-                                        echo $_POST['comment'];
+                                        echo htmlspecialchars($_POST['comment']);
                                     } ?></textarea>
                                 <?php
                                 if (isset($erreursForm['comment'])) {

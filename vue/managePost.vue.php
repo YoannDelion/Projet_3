@@ -58,7 +58,7 @@ include_once __DIR__ . '/includes/adminMenu.inc.vue.php';
                     <input class="form-control <?php if (isset($erreursForm['title'])) {
                         echo ' erreur-form';
                     } ?>" id="title" name="title" type="text"
-                           required value="<?= $postToUpdate->getTitle(); ?>"/>
+                           required value="<?= htmlspecialchars($postToUpdate->getTitle()); ?>"/>
                     <?php
                     if (isset($erreursForm['title'])) {
                         echo '<p class="erreur-text"> ' . $erreursForm['title'] . '</p>';

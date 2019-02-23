@@ -10,6 +10,8 @@ include_once __DIR__ . '/../utils/autoloader.php';
 
 session_start();
 
+$title='Administration';
+
 
 if (!isset($_SESSION['identifiant'])) {
     header('Location: /connexion');

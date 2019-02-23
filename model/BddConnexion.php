@@ -40,7 +40,7 @@ class BddConnexion
      */
     protected function __construct()
     {
-        if ( is_null(self::$_dbInstance) ) {
+        if (is_null(self::$_dbInstance) ) {
             self::$_dbInstance = new PDO('mysql:host=localhost;dbname=projet3;charset=utf8', 'root', '');
         }
     }

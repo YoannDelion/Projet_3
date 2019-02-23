@@ -15,6 +15,7 @@ if (!isset($_SESSION['identifiant'])) {
     exit();
 }
 
+$title = 'Administration - Gestion des chapitres';
 $posts = new Post();
 
 //suppression d'un article

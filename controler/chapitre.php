@@ -8,7 +8,7 @@
 
 include_once __DIR__ . '/../utils/autoloader.php';
 
-
+$title='Chapitre';
 $post = new Post();
 $comments = new Comment();
 $erreur = null;

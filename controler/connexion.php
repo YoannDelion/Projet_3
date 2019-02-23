@@ -11,6 +11,8 @@ include_once __DIR__ . '/../utils/autoloader.php';
 
 session_start();
 
+$title='Connexion';
+
 if (isset($_SESSION['identifiant'])) {
     header('Location: /admin');
     exit();

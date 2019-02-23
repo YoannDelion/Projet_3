@@ -15,6 +15,8 @@ if (!isset($_SESSION['identifiant'])) {
     exit();
 }
 
+$title='Administration - Gestion des commentaires';
+
 $reports = new Comment();
 
 if(isset($_GET['id']) && $_GET['id'] != null){

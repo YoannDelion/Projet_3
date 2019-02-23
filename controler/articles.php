@@ -8,6 +8,7 @@
 
 include_once __DIR__ . '/../utils/autoloader.php';
 
+$title='Tous les chapitres';
 
 $post = new Post();
 $nbPosts = $post->findAll();

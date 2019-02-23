@@ -15,6 +15,7 @@ if (!isset($_SESSION['identifiant'])) {
     exit();
 }
 
+$title = 'Administration - Ajouter un chapitre';
 
 if (isset($_POST['envoyer']) && $_POST['envoyer'] === 'envoyer') {
     $erreursForm = Array();

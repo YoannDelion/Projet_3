@@ -9,6 +9,7 @@
 include_once __DIR__ . '/../utils/autoloader.php';
 
 
+$title = "Accueil";
 $post = new Post();
 
 //On récupère les trois derniers posts publiés

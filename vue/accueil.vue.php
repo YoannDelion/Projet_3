@@ -1,21 +1,6 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Accueil</title>
-
-    <!-- BOOTSTRAP -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-    <!-- STYLES -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link href="/vue/css/style.css" rel="stylesheet">
-</head>
+<?php
+include_once __DIR__ . '/includes/headerHTML.inc.vue.php';
+?>
 
 <body>
 <div class="container-fluid">
@@ -41,32 +26,26 @@
         <section class="col-sm-9 ">
             <h4>Les derniers chapitres</h4>
 
-            <?php
-            if (isset($posts) && count($posts) > 0) {
-                foreach ($posts as $post) {
-                    ?>
+            <?php if (isset($posts) && count($posts) > 0) :
+                foreach ($posts as $post) : ?>
                     <article class="post">
                         <h5><?= $post->getTitle(); ?></h5>
 
 
-
-                        <p class="text-right">Publié le <?= date("d-m-Y à H:i", strtotime($post->getCreatedAt())); ?></p>
-
-
+                        <p class="text-right">Publié
+                            le <?= date("d-m-Y à H:i", strtotime($post->getCreatedAt())); ?></p>
 
 
-                        <p><?= strip_tags(html_entity_decode(mb_substr($post->getContent(), 0, 200))).'...'; ?></p>
+                        <p><?= strip_tags(html_entity_decode(mb_substr($post->getContent(), 0, 200))) . '...'; ?></p>
                         <a href="/chapitre?id=<?= $post->getId(); ?>" class="readMore">Lire la suite <span
                                     class="fas fa-arrow-right"></span></a>
                     </article>
-                <?php }
-            } else { ?>
+                <?php endforeach;
+            else : ?>
                 <div class="alert alert-warning text-center">
                     <b>Aucun article n'a été publié pour le moment !</b>
                 </div>
-                <?php
-            }
-            ?>
+            <?php endif; ?>
 
             <div class="text-center">
                 <a href="/articles" class="readMore">Lire tous les articles</a>
